@@ -1,0 +1,66 @@
+import React, {Component} from 'react';
+
+class App extends Component{
+  state = {
+    content : "",
+    email : "",
+    password : "",
+    name : "",
+    address : ""
+  }
+  show = () => {
+    //input 의 내용을 읽어와서 화면에 출력
+    // input의 내용을 읽어와야함
+    // 1. ref를 활용하는 방법
+    // 2. state를 활용하는 방법 (react에서 권장하는 방법)
+     // 그 값을state에 저장해야함
+
+     // ref를 활용하는방법
+    // console.log(this.refs.myInput.value)
+    // this.setState({
+    //   content: this.refs.myInput.value
+    // })
+
+    this.setState({
+      content: this.state.inputValue
+    })
+  }
+
+  // onSend = () => {
+  //   const {email, password, name, address} = this.state;
+  //   console.log(email)
+  //   //유효성 검사 코드
+  // }
+
+  onChange = (e) =>{
+    // 객체 키를 유동적으로 사용할때
+    // const abc = "otherkey"
+    // const test = {
+    //   id:"aa",
+    //   [abc] : "a"
+    // }
+    console.log(e.target.name)
+    this.setState({
+      [e.target.name] : e.target.value
+    })
+  }
+  render() {
+    const {content, 
+             email,
+          password,
+              name,
+          address} = this.state;
+  return (
+    <div>
+        <input placeholder="email" name="email" value={email} onChange={this.onChange}/>
+        <input placeholder="password" name="password" value={password} onChange={this.onChange}/>
+        <input placeholder="name" value={name}  name="name" onChange={this.onChange}/>
+        <input placeholder="address" value={address} name="address" onChange={this.onChange}/>
+        <button onClick={this.show}>show</button>
+        <h1>{content}</h1>
+    </div>
+  );
+}
+}
+
+export default App;
